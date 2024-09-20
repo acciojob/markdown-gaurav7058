@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import "../styles/App.css"
+import MarkDown from './MarkDown';
 export default function App() {
     const [markDown,setMarkDown]=useState("");
   return (
@@ -10,7 +11,7 @@ export default function App() {
         </div>
         <div className="preview">
             <h1>Markdown Preview</h1>
-           <h2>{markDown}</h2> 
+           <MarkDown markDown={markDown}></MarkDown>
         </div>
       </div>
   )

@@ -1,18 +1,53 @@
-import React, { useState } from 'react'
-import "../styles/App.css"
-import MarkDown from './MarkDown';
-export default function App() {
-    const [markDown,setMarkDown]=useState("");
+import React, { useState, useEffect } from 'react';
+import ReactMarkdown from '../components/MarkDown';
+import '../styles/App.css'; // Import the CSS file
+
+const App = () => {
+  const [markdown, setMarkdown] = useState(''); // State for markdown input
+  const [isLoading, setIsLoading] = useState(true); // State for loading indicator
+
+  // Simulate a loading effect with useEffect
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false); // Disable loading after a short delay
+    }, 1000);
+
+    return () => clearTimeout(timer); // Cleanup timeout
+  }, []);
+
+  // Function to handle changes in the textarea
+  const handleMarkdownChange = (e) => {
+    setMarkdown(e.target.value);
+  };
+
   return (
-      <div className="app">
-        <div className="textarea">
-            <h1>Markdown Editor</h1>
-            <textarea name="" id="" className='textarea' value={markDown} onChange={(e)=>setMarkDown(e.target.value)}></textarea>
+    <div className="app">
+      {isLoading ? (
+        <p className="loading">Loading...</p> // Show loading indicator
+      ) : (
+        <div className="markdown-container">
+          {/* Left Side: Markdown Editor */}
+          <div className="editor-pane">
+            <h2>Markdown Editor</h2>
+            <textarea
+              className="textarea"
+              value={markdown}
+              onChange={handleMarkdownChange}
+              placeholder="Write your markdown here..."
+            />
+          </div>
+          
+          {/* Right Side: Markdown Preview */}
+          <div className="preview-pane">
+            <h2>Markdown Preview</h2>
+            <div className="preview">
+              <ReactMarkdown markDown={markdown}></ReactMarkdown>
+            </div>
+          </div>
         </div>
-        <div className="preview">
-            <h1>Markdown Preview</h1>
-           <MarkDown markDown={markDown}></MarkDown>
-        </div>
-      </div>
-  )
-}
+      )}
+    </div>
+  );
+};
+
+export default App;

@@ -28,7 +28,7 @@ const App = () => {
         <div className="markdown-container">
           {/* Left Side: Markdown Editor */}
           <div className="editor-pane">
-            <h2>Markdown Editor</h2>
+            <h1>Markdown Editor</h1>
             <textarea
               className="textarea"
               value={markdown}
@@ -39,7 +39,7 @@ const App = () => {
           
           {/* Right Side: Markdown Preview */}
           <div className="preview-pane">
-            <h2>Markdown Preview</h2>
+            <h1>Markdown Preview</h1>
             <div className="preview">
               <ReactMarkdown markDown={markdown}></ReactMarkdown>
             </div>
